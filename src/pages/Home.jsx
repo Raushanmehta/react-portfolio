@@ -6,13 +6,14 @@ import CTASection from "@/sections/CTASection"
 import TimelineSection from "@/sections/TimelineSection"
 import ArticlesSection from "@/sections/ArticlesSection"
 import Snowfall from "react-snowfall"
-import Chatbot from "@/components/Chatbot"
+
+
 
 
 const Home = () => {
   return (
     <>
-    <Chatbot/>
+    
     <Snowfall />
       <Hero />
       <TimelineSection/> 

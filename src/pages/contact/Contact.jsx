@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
-import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { motion } from "motion/react";
+import { sendMessage } from "@/api/contact.api";
 
 
+// Animation configs
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -25,44 +26,67 @@ const item = {
 };
 
 const Contact = () => {
-  const [senderName, setSenderName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    senderName: "",
+    subject: "",
+    email: "",
+    message: "",
+  });
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Handle input change
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Validation
   const validateForm = () => {
     const newErrors = {};
-    if (!senderName) newErrors.senderName = "Name is required.";
-    if (!subject) newErrors.subject = "Subject is required.";
-    if (!email) newErrors.email = "Email is required.";
-    else if (!/\S+@\S+\.\S+/.test(email))
-      newErrors.email = "Email address is invalid.";
-    if (!message) newErrors.message = "Message is required.";
+
+    if (!formData.senderName) newErrors.senderName = "Name is required.";
+    if (!formData.subject) newErrors.subject = "Subject is required.";
+    if (!formData.email) newErrors.email = "Email is required.";
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Email is invalid.";
+    if (!formData.message) newErrors.message = "Message is required.";
+
     return newErrors;
   };
 
+  // Submit
   const handleMessage = async (e) => {
     e.preventDefault();
+
     const formErrors = validateForm();
     setErrors(formErrors);
+
     if (Object.keys(formErrors).length > 0) return;
 
     setLoading(true);
+
     try {
-      const res = await axios.post(
-        "http://localhost:4000/api/v1/message/send",
-        { senderName, subject, email, message },
-        { withCredentials: true }
-      );
-      toast.success(res.data.message);
-      setSenderName("");
-      setSubject("");
-      setEmail("");
-      setMessage("");
+      const data = await sendMessage(formData);
+
+      toast.success(data.message);
+
+      // Reset form
+      setFormData({
+        senderName: "",
+        subject: "",
+        email: "",
+        message: "",
+      });
+
     } catch (error) {
-      toast.error(error.response?.data?.message || "Error sending message");
+      console.error(error);
+      toast.error(
+        error?.response?.data?.message || "Error sending message"
+      );
     } finally {
       setLoading(false);
     }
@@ -85,17 +109,15 @@ const Contact = () => {
       </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mt-14">
-        {/* Left Info */}
-        <motion.div variants={container} className="rounded-lg p-2 md:p-8">
-          <motion.h2
-            variants={item}
-            className="text-xl sm:text-3xl font-Ovo mb-6"
-          >
+
+        {/* LEFT SIDE */}
+        <motion.div variants={container} className="p-2 md:p-8">
+          <motion.h2 variants={item} className="text-xl sm:text-3xl font-Ovo mb-6">
             Let’s Work Together
           </motion.h2>
 
-          {[ 
-            { icon: <MapPin />, title: "Address", value: "Mehndiganj Road, Patna, Bihar 800008" },
+          {[
+            { icon: <MapPin />, title: "Address", value: "Ahmdhabad, Patna, Bihar" },
             { icon: <Phone />, title: "Phone", value: "+91 9304137746" },
             { icon: <Mail />, title: "Email", value: "raushanmehta2184@gmail.com" },
           ].map((info, i) => (
@@ -111,76 +133,72 @@ const Contact = () => {
           ))}
         </motion.div>
 
-        {/* Right Form */}
-        <motion.div variants={container} className="rounded-lg p-2 md:p-8">
+        {/* RIGHT FORM */}
+        <motion.div variants={container} className="p-2 md:p-8">
           <motion.form
             variants={container}
             onSubmit={handleMessage}
             className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           >
-            {[
-              {
-                label: "Name",
-                value: senderName,
-                set: setSenderName,
-                error: errors.senderName,
-                span: 1,
-              },
-              {
-                label: "Subject",
-                value: subject,
-                set: setSubject,
-                error: errors.subject,
-                span: 1,
-              },
-            ].map((field, i) => (
-              <motion.div key={i} variants={item}>
-                <label className="font-Ove">{field.label}</label>
-                <Input
-                  value={field.value}
-                  onChange={(e) => field.set(e.target.value)}
-                  className="mt-2"
-                  placeholder={`Your ${field.label.toLowerCase()}`}
-                />
-                {field.error && (
-                  <p className="text-red-500 text-sm mt-1">{field.error}</p>
-                )}
-              </motion.div>
-            ))}
-
-            <motion.div variants={item} className="col-span-2">
-              <label className="font-Ove">Email</label>
+            {/* Name */}
+            <motion.div variants={item}>
+              <label>Name</label>
               <Input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                className="mt-2"
+                name="senderName"
+                value={formData.senderName}
+                onChange={handleChange}
+                placeholder="Your name"
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
+              {errors.senderName && <p className="text-red-500 text-sm">{errors.senderName}</p>}
             </motion.div>
 
+            {/* Subject */}
+            <motion.div variants={item}>
+              <label>Subject</label>
+              <Input
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="Subject"
+              />
+              {errors.subject && <p className="text-red-500 text-sm">{errors.subject}</p>}
+            </motion.div>
+
+            {/* Email */}
             <motion.div variants={item} className="col-span-2">
-              <label className="font-Ove">Message</label>
+              <label>Email</label>
+              <Input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your email"
+              />
+              {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+            </motion.div>
+
+            {/* Message */}
+            <motion.div variants={item} className="col-span-2">
+              <label>Message</label>
               <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows="3"
-                className="w-full border rounded-lg mt-2 p-3 bg-transparent"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows="4"
+                className="w-full border rounded-lg p-3"
                 placeholder="Your message"
               />
-              {errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
-              )}
+              {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
             </motion.div>
 
+            {/* Button */}
             <motion.div variants={item} className="col-span-2">
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.96 }}>
-                <Button className="w-full bg-gradient-to-r from-[#228BE6] to-cyan-300">
-                  {loading ? "Sending..." : "SEND MESSAGE"}
-                </Button>
-              </motion.div>
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-[#228BE6] to-cyan-300"
+              >
+                {loading ? "Sending..." : "SEND MESSAGE"}
+              </Button>
             </motion.div>
           </motion.form>
         </motion.div>

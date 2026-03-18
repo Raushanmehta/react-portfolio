@@ -3,12 +3,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ArticlesSectionCard from "./ArticlesSectionCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getAllArticles } from "@/api/article.api";
 
 const ArticlesSection = () => {
   const navigate = useNavigate();
   const [allArticles, setAllArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const settings = {
     dots: true,
@@ -35,30 +36,41 @@ const ArticlesSection = () => {
     ],
   };
 
-  useEffect(() => {
-    const fetchAll = async () => {
+ useEffect(() => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:4000/api/v1/articles/getall"
-        );
-        setAllArticles(res.data.articles);
+        const res = await getAllArticles();
+        setAllArticles(res?.data?.articles || []); // ✅ safe access
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching articles:", err);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchAll();
+
+    fetchData();
   }, []);
+
+  // ✅ Loading state
+  if (loading) {
+    return <p className="text-center py-10">Loading articles...</p>;
+  }
+
+  // ✅ No data fallback
+  if (allArticles.length === 0) {
+    return <p className="text-center py-10">No articles found</p>;
+  }
 
   return (
     <section className="pb-24">
-      <h2 className="text-center text-3xl  font-Ovo">
+      <h2 className="text-center text-3xl font-Ovo">
         My Articles Post
       </h2>
 
       <p className="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo">
-        Here are some of my articles that I will written. I hope you enjoy reading
-        them as much as I enjoyed writing them.
+        Here are some of my articles that I have written.
       </p>
+
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <Slider {...settings}>
           {allArticles.map((article) => (

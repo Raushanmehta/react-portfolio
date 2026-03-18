@@ -1,4 +1,5 @@
-import axios from "axios";
+import { getProject } from "@/api/project.api";
+
 import { GithubIcon, ProjectorIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -6,48 +7,63 @@ import { toast } from "sonner";
 
 
 const ProjectView = () => {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [projectBanner, setProjectBanner] = useState("");
-  const [description, setDescription] = useState("");
-  const [challenges, setChallenges] = useState("");
-  const [technologies, setTechnologies] = useState("");
-  const [stack, setStack] = useState("");
-  const [gitRepoLink, setGitRepoLink] = useState("");
-  const [projectLink, setProjectLink] = useState("");
-  const [deployed, setDeployed] = useState("");
+  const { id } = useParams();
 
-  const { id } = useParams(); 
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getProject = async () => {
-      await axios
-        .get(`http://localhost:4000/api/v1/project/get/${id}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          setTitle(res.data.project.title);
-          setDate(res.data.project.date);
-          setDescription(res.data.project.description);
-          setChallenges(res.data.project.challenges);
-          setGitRepoLink(res.data.project.gitRepoLink);
-          setProjectLink(res.data.project.projectLink);
-          setTechnologies(res.data.project.technologies);
-          setStack(res.data.project.stack);
-          setDeployed(res.data.project.deployed);
-          setProjectBanner(
-            res.data.project.projectBanner && res.data.project.projectBanner.url
-          );
-        })
-        .catch((error) => {
-          toast.error(error.response.data.message);
-        });
+    let isMounted = true;
+
+    const fetchProject = async () => {
+      try {
+        const res = await getProject(id);
+
+        if (!isMounted) return;
+
+        setProject(res?.data?.project);
+      } catch (error) {
+        console.error(error);
+        toast.error(
+          error?.response?.data?.message || "Failed to fetch project"
+        );
+      } finally {
+        if (isMounted) setLoading(false);
+      }
     };
-    getProject();
+
+    if (id) fetchProject();
+
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
 
-  const descriptionInListFormat = description.split(".");
-  const technologiesInListFormat = technologies.split(",");
+  // ✅ Loading
+  if (loading) {
+    return <p className="text-center py-20">Loading project...</p>;
+  }
+
+  if (!project) {
+    return <p className="text-center py-20">Project not found</p>;
+  }
+
+  // ✅ destructuring
+  const {
+    title,
+    date,
+    projectBanner,
+    description = "",
+    challenges,
+    technologies = "",
+    stack,
+    gitRepoLink,
+    projectLink,
+    deployed,
+  } = project;
+
+  const descriptionList = description.split(".").filter(Boolean);
+  const techList = technologies.split(",").filter(Boolean);
 
   return (
     <div className="w-full h-full">
@@ -76,7 +92,7 @@ const ProjectView = () => {
           <div>
             <h2 className="text-lg font-Ove">Description</h2>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
-              {descriptionInListFormat.map((sentence, index) => (
+              {descriptionList.map((sentence, index) => (
                 <li key={index} className="text-base">{sentence.trim() && 
                   sentence.trim() + "."}</li>
               ))}
@@ -85,7 +101,7 @@ const ProjectView = () => {
           <div>
             <h2 className="text-lg font-Ove">Technologies</h2>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
-              {technologiesInListFormat.map((tech, index) => (
+              {techList.map((tech, index) => (
                 <li key={index} className="text-base">{tech.trim()}</li>
               ))}
             </ul>

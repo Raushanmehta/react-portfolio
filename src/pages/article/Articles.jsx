@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import axios from "axios"
 import ArticlesDetails from "./ArticlesDetails"
 import ArticleRecent from "./ArticleRecent"
+import { getAllArticles, getArticleBySlug } from "@/api/article.api"
 
 
 const item = {
@@ -21,34 +22,37 @@ const Articles = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchAll = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/v1/articles/getall")
-        setAllArticles(res.data.articles)
+        const res = await getAllArticles();
+        setAllArticles(res.data.articles);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-    }
-    fetchAll()
-  }, [])
+    };
+
+    fetchAll();
+  }, []);
+
 
 
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        setLoading(true)
-        const res = await axios.get(`http://localhost:4000/api/v1/articles/${slug}`)
-        setCurrentArticle(res.data.article)
-        setLoading(false)
+        setLoading(true);
+        const res = await getArticleBySlug(slug);
+        setCurrentArticle(res.data.article);
       } catch (err) {
-        console.error(err)
-        setError("Article not found")
-        setLoading(false)
+        console.error(err);
+        setError("Article not found");
+      } finally {
+        setLoading(false);
       }
-    }
-    fetchArticle()
-  }, [slug])
+    };
+
+    if (slug) fetchArticle();
+  }, [slug]);
 
 
   const related = currentArticle

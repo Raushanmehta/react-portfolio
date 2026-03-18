@@ -37,7 +37,7 @@ const Navbar = () => {
 
           <Link to="/"
             className="text-3xl font-extrabold dark:text-white">
-            Raushan<sup className="text-blue-500 font-medium">®</sup>
+            Raushan<sup  className="text-blue-500 font-medium">®</sup>
           </Link>
 
           <ul className="hidden md:flex gap-8 px-12 py-4 rounded-full
