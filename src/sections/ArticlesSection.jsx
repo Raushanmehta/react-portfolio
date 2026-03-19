@@ -24,11 +24,12 @@ const ArticlesSection = () => {
     responsive: [
       { breakpoint: 1280, settings: { slidesToShow: 4 } },
       { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 768, settings: { slidesToShow: 1 } },
       {
         breakpoint: 640,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1,  
+          slidesToScroll: 1,
           arrows: false,
           dots: true,
         },
@@ -36,7 +37,7 @@ const ArticlesSection = () => {
     ],
   };
 
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await getAllArticles();

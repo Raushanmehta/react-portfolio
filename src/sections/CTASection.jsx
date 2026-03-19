@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 
 export default function CTASection() {
+  const navigate = useNavigate();
   return (
     <motion.div
       className="
@@ -45,7 +47,7 @@ export default function CTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          Ready to try-out this app?
+          Let’s Create Something Impactful 
         </motion.h1>
 
         <motion.p
@@ -60,7 +62,7 @@ export default function CTASection() {
           viewport={{ once: true }}
           transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
         >
-          Your next favourite tool is just one click away.
+           I’m a passionate software developer open to full-time opportunities, remote roles, and relocation for the right challenge.
         </motion.p>
       </div>
 
@@ -82,6 +84,7 @@ export default function CTASection() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.3 }}
+        onClick={() => navigate("/contact")}
       >
         Get Started
       </motion.button>
