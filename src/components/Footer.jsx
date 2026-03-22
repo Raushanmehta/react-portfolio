@@ -37,10 +37,10 @@ const Footer = () => {
 
   return (
     <footer className="w-full shadow-md py-6 text-center flex flex-col items-center">
-      
+
       {/* SOCIAL ICONS */}
       <div className="flex flex-wrap justify-center gap-6 mb-10">
-        
+
         {user?.linkedInURL && (
           <a
             href={user.linkedInURL}
@@ -99,8 +99,16 @@ const Footer = () => {
 
       {/* FOOTER TEXT */}
       <p className="text-gray-500 text-sm">
-        © 2026 Raushan Mehta. All rights reserved.{" "}
-        <span className="font-semibold">Raushanmehta.in</span>
+        <a
+          href="https://raushanmehtaadmin.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer"
+        >
+          ©
+        </a>{" "}
+        2026 Raushan Mehta. All rights reserved.{" "}
+        <span className="font-semibold">raushanmehta.in</span>
       </p>
     </footer>
   );

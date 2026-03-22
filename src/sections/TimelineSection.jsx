@@ -54,7 +54,7 @@ const TimelineSection = () => {
   }
 
   return (
-    <section className="w-full px-[12%] py-10">
+    <section className="w-full px-[6%] md:px-[12%] py-10">
       {/* HEADER */}
       <motion.div
         variants={fadeUp}
@@ -145,7 +145,7 @@ const TimelineSection = () => {
         >
           <h2 className="text-2xl font-Ove mb-8">My Skills</h2>
 
-          <div className="grid grid-cols-4 md:grid-cols-6 gap-x-10 gap-y-6 ">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-x-10 gap-y-6 ">
             {skills.map((skill, index) => (
               <motion.div
                 key={skill._id}

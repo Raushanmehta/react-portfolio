@@ -53,11 +53,11 @@ const ServiceSection = () => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="w-full px-[12%] py-10 "
+      className="w-full px-[6%] md:px-[12%] py-10 "
     >
       {/* Section Header */}
       <motion.div variants={item} className="text-center mb-16">
-        <h1 className="text-sm md:text-3xl mb-2 font-Ove">
+        <h1 className="text-center text-3xl font-Ovo mb-2">
           Services
         </h1>
         <p className="text-base font-Ove text-gray-600">

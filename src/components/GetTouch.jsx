@@ -8,7 +8,7 @@ const GetTouch = () => {
         <img 
           src="/assets/img/balls.png"
           alt="bolls"
-          className="animate-updown h-32 w-56 sm:h-56 sm:w-96"
+          className="animate-updown h-28 w-56 sm:h-56 sm:w-96"
         />
       </div>
       <div className="relative rounded-t-full px-4 pt-8 lg:pt-16 
