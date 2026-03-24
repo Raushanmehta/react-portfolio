@@ -31,7 +31,7 @@ const ProjectFilter = ({
       {/* RIGHT SIDE – FILTER */}
       <div className="w-full sm:w-auto">
         <Select value={selectedStack} onValueChange={onStackChange}>
-          <SelectTrigger className="w-[200px] border-2 border-[#228BE6]">
+          <SelectTrigger className="w-full sm:w-[200px] border-2 border-[#228BE6]">
             <SelectValue placeholder="Filter by Stack" />
           </SelectTrigger>
           <SelectContent>

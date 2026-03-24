@@ -94,7 +94,7 @@ const Project = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="w-full px-[12%] py-10 mt-8 md:mt-16"
+      className="w-full px-[6%] md:px-[12%] py-10 mt-8 md:mt-16"
     >
       {/* Header */}
       <motion.header
@@ -103,7 +103,7 @@ const Project = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-8"
       >
-        <h1 className="font-Ovo text-xl md:text-3xl">
+        <h1 className="font-Ove text-xl md:text-3xl">
           Projects
         </h1>
         <p className="mt-2 text-slate-400">

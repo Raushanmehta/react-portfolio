@@ -40,7 +40,7 @@ const TimelineSection = () => {
   }, []);
 
   const filteredTimeline = useMemo(() => {
-    return timeline
+    return (timeline || [])
       .filter((item) => item.type?.toLowerCase() === activeTab)
       .sort((a, b) => new Date(b.timeline?.to) - new Date(a.timeline?.to));
   }, [timeline, activeTab]);
@@ -55,7 +55,6 @@ const TimelineSection = () => {
 
   return (
     <section className="w-full px-[6%] md:px-[12%] py-10">
-      {/* HEADER */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -63,46 +62,37 @@ const TimelineSection = () => {
         viewport={{ once: true }}
       >
         <h1 className="text-4xl font-Ove mb-4">Skills & Experience</h1>
-        <p className="text-gray-500 max-w-xl mb-12">
-          Targeting Frontend Developer roles with an organization of high repute
-          with a scope of improving knowledge and further career growth.
+        <p className="text-gray-500 max-w-xl mb-12 font-Ove">
+          Targeting Frontend Developer roles with an organization of high repute with a scope of improving knowledge and further career growth.
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-        {/* ================= LEFT : TIMELINE ================= */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {/* TABS */}
           <div className="flex w-full max-w-lg border-2 border-blue-500 rounded-xl overflow-hidden mb-10">
             <button
               onClick={() => setActiveTab("experience")}
-              className={`w-1/2 py-4 font-medium ${
-                activeTab === "experience"
-                  ? "bg-blue-500"
-                  : ""
+              className={`w-1/2 py-4 font-medium transition-colors ${
+                activeTab === "experience" ? "bg-blue-500 text-white" : ""
               }`}
             >
               Experience
             </button>
-
             <button
               onClick={() => setActiveTab("education")}
-              className={`w-1/2 py-4 font-medium ${
-                activeTab === "education"
-                  ? "bg-blue-500 "
-                  : ""
+              className={`w-1/2 py-4 font-medium transition-colors ${
+                activeTab === "education" ? "bg-blue-500 text-white" : ""
               }`}
             >
               Education
             </button>
           </div>
 
-          {/* TIMELINE */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {filteredTimeline.map((item, index) => (
               <motion.div
@@ -112,9 +102,9 @@ const TimelineSection = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className=""
+                className="space-y-1"
               >
-                <h3 className="font-semibold text-lg">
+                <h3 className="font-semibold text-lg font-Ove">
                   {item.title}
                   {index === 0 && (
                     <span className="ml-3 text-xs bg-pink-500 text-white px-2 py-1 rounded">
@@ -122,21 +112,17 @@ const TimelineSection = () => {
                     </span>
                   )}
                 </h3>
-
-                <p className="text-pink-600">{item.position}</p>
-                {item.marks && (
-                  <p className="text-gray-500">{item.marks}</p>
-                )}
-                <p className="text-gray-500">
+                <p className="text-pink-600 font-Ove">{item.position}</p>
+                {item.marks && <p className="text-gray-500 font-Ove">{item.marks}</p>}
+                <p className="text-gray-500 font-Ove">
                   {item.timeline?.from} - {item.timeline?.to}
                 </p>
-                <p className="text-gray-500">{item.description}</p>
+                <p className="text-gray-500 text-sm font-Ove">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* ================= RIGHT : SKILLS ================= */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -144,8 +130,7 @@ const TimelineSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-2xl font-Ove mb-8">My Skills</h2>
-
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-x-10 gap-y-6 ">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-x-10 gap-y-6">
             {skills.map((skill, index) => (
               <motion.div
                 key={skill._id}
@@ -161,7 +146,7 @@ const TimelineSection = () => {
                   alt={skill.title}
                   className="h-12 w-12 mx-auto object-contain rounded-full cursor-pointer hover:-translate-y-2 duration-500"
                 />
-                <p className="mt-2 font-medium">{skill.title}</p>
+                <p className="mt-2 font-medium text-sm font-Ove">{skill.title}</p>
               </motion.div>
             ))}
           </div>

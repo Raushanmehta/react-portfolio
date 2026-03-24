@@ -8,11 +8,12 @@ export default function CTASection() {
     <motion.div
       className="
         max-w-7xl 
+        
         py-16 
         mb-16
         md:pl-20 
         md:w-full 
-        max-md:mx-4 
+        max-md:mx-6 
         md:mx-auto 
         flex 
         flex-col 
@@ -47,7 +48,7 @@ export default function CTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          Let’s Create Something Impactful 
+          Let’s Create Something Impactful
         </motion.h1>
 
         <motion.p
@@ -62,7 +63,7 @@ export default function CTASection() {
           viewport={{ once: true }}
           transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
         >
-           I’m a passionate software developer open to full-time opportunities, remote roles, and relocation for the right challenge.
+          I’m a passionate software developer open to full-time opportunities, remote roles, and relocation for the right challenge.
         </motion.p>
       </div>
 

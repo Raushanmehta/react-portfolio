@@ -32,16 +32,15 @@ const item = {
 const HeroSection = () => {
   const [user, setUser] = useState({});
 
-useEffect(() => {
-  getMyProfile()
-    .then((res) => {
-      setUser(res.data.user);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}, []);
- 
+  useEffect(() => {
+    getMyProfile()
+      .then((res) => {
+        setUser(res.data.user);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <motion.div
@@ -62,7 +61,7 @@ useEffect(() => {
       {/* Greeting */}
       <motion.h3
         variants={item}
-        className="flex items-center gap-2 text-xl md:text-2xl font-Ovo"
+        className="flex items-center gap-2 text-xl md:text-2xl font-Ove"
       >
         Hi! I&apos;m {user?.fullName || "John Doe"} <HandHeart />
       </motion.h3>
@@ -70,7 +69,7 @@ useEffect(() => {
       {/* Title */}
       <motion.h1
         variants={item}
-        className="text-3xl sm:text-6xl lg:text-[66px] font-Ovo leading-tight"
+        className="text-3xl sm:text-6xl lg:text-[66px] font-Ove leading-tight"
       >
         Software Developer based in India
       </motion.h1>
@@ -78,7 +77,7 @@ useEffect(() => {
       {/* Description */}
       <motion.p
         variants={item}
-        className="max-w-2xl font-Ovo text-gray-600 dark:text-gray-300"
+        className="max-w-2xl font-Ove text-gray-600 dark:text-gray-300"
       >
         I am a Software Developer from Bengaluru, India with experience building
         modern, scalable, and performance-focused applications.

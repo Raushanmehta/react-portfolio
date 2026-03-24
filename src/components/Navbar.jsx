@@ -29,19 +29,19 @@ const Navbar = () => {
       </div>
 
       <header className="fixed top-0 w-full z-50 ">
-        <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1 }} className="px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between">
+        <motion.nav
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1 }} className="px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between">
 
           <Link to="/"
             className="text-3xl font-extrabold dark:text-white">
-            Raushan<sup  className="text-blue-500 font-medium">®</sup>
+            Raushan<sup className="text-blue-500 font-medium">®</sup>
           </Link>
 
           <ul className="hidden md:flex gap-8 px-12 py-4 rounded-full
-            bg-white/60 shadow-md font-Ovo backdrop-blur-md
+            bg-white/60 shadow-md font-Ove backdrop-blur-md
             dark:bg-transparent dark:border dark:border-white/30 dark:text-white">
 
             {["Home", "About", "Project", "Contact"].map((item) => (
@@ -77,7 +77,7 @@ const Navbar = () => {
 
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="md:hidden p-2"
+              className="md:hidden py-2"
               aria-label="Open menu"
             >
               <Menu size={26} className="dark:text-white" />

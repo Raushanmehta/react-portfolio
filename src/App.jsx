@@ -27,7 +27,7 @@ const App = () => {
             <Loader />
           </div>
         }>
-        
+
         <Router>
           <Navbar />
           <Routes>
@@ -37,7 +37,7 @@ const App = () => {
             <Route path="/project/" element={<Project />} />
             <Route path="/article/:slug" element={<Articles />} />
             <Route path="/contact/" element={<Contact />} />
-            <Route path="*" element={<ErrorPage/>}/>
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />
         </Router>

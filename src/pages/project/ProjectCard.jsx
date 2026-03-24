@@ -38,8 +38,8 @@ const ProjectCard = ({ project }) => {
         </p>
 
         <p className="text-sm text-gray-600">
-          <span className="font-medium">Tech:</span>{" "}
-          {project.technologies}
+          <span className="font-medium">Project Link:</span>{" "}
+          {project.projectLink}
         </p>
       </div>
     </motion.div>

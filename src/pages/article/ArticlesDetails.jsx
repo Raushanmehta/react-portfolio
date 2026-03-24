@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar} from "lucide-react"
 import { motion } from "motion/react"
 import PropTypes from "prop-types"
+import Loader from "@/components/loader/Loader"
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -9,8 +10,14 @@ const fadeUp = {
   transition: { duration: 0.7, ease: "easeOut" },
 }
 
-const ArticlesDetails = ({ article, related }) => {
-  if (!article) return null
+const ArticlesDetails = ({ article, related, loading }) => {
+  if (loading || !article) {
+    return (
+      <div className="w-full lg:w-2/3 min-h-[400px] flex items-center justify-center border rounded-lg bg-slate-50/50">
+        <Loader />
+      </div>
+    );
+  }
 
   const formattedDate = new Date(article.createdAt).toLocaleString("en-IN", {
     day: "2-digit",
@@ -21,9 +28,9 @@ const ArticlesDetails = ({ article, related }) => {
   })
 
   return (
-    <div className="lg:w-2/3 space-y-6">
+    <div className="w-full lg:w-2/3 space-y-6 text-left">
       <div>
-        <h2 className="text-3xl font-bold mb-3">{article.title}</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-3">{article.title}</h2>
         <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
           <div className="flex items-center gap-2">
             <Calendar className="text-primary" />
@@ -31,12 +38,12 @@ const ArticlesDetails = ({ article, related }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <p>Author :</p>
-            <span>{article.author}</span>
+            <p className="font-semibold text-gray-800">Author :</p>
+            <span className="text-gray-700">{article.author}</span>
           </div>
           <div className="flex items-center gap-2">
-            <p>Category :</p>
-            <span>{article.category}</span>
+            <p className="font-semibold text-gray-800">Category :</p>
+            <span className="text-gray-700">{article.category}</span>
           </div>
           <div className="relative flex items-center gap-2 px-2 py-1 rounded">
             <span className="capitalize">{article.status}</span>
@@ -60,23 +67,23 @@ const ArticlesDetails = ({ article, related }) => {
         />
       )}
 
-      <Card>
-        <CardContent className="space-y-2 py-6">
-          <p className="text-gray-700">{article.excerpt}</p>
+      <Card className="bg-slate-50 border-none shadow-none">
+        <CardContent className="space-y-4 py-6">
+          <p className="text-lg md:text-xl text-gray-800 italic leading-relaxed">"{article.excerpt}"</p>
 
           {article.tags && article.tags.length > 0 && (
-            <div className="text-sm text-gray-500">
-              <strong>Tags:</strong> {article.tags.join(", ")}
+            <div className="text-sm text-gray-500 font-medium">
+              <span className="text-gray-900 mr-2 font-bold">Tags:</span> {article.tags.join(", ")}
             </div>
           )}
         </CardContent>
       </Card>
 
       <motion.div {...fadeUp} viewport={{ once: true }}>
-        <Card>
-          <CardContent className="py-6">
+        <Card className="border-none shadow-none">
+          <CardContent className="py-6 px-0">
             <div
-              className="prose max-w-none"
+              className="prose prose-lg max-w-none text-gray-800 leading-8"
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </CardContent>
@@ -137,6 +144,7 @@ ArticlesDetails.propTypes = {
       title: PropTypes.string.isRequired,
     })
   ),
+  loading: PropTypes.bool,
 }
 
 export default ArticlesDetails

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllProjects } from "@/api/project.api";
+import Loader from "@/components/loader/Loader";
 
 const ProjectSection = () => {
   const [projects, setProjects] = useState([]);
@@ -38,7 +39,9 @@ const ProjectSection = () => {
   // ✅ Loading UI
   if (loading) {
     return (
-      <p className="text-center py-20">Loading projects...</p>
+      <div className="flex items-center justify-center py-24">
+        <Loader />
+      </div>
     );
   }
 
@@ -52,7 +55,7 @@ const ProjectSection = () => {
   }
 
   // ✅ Empty state (important)
-  if (projects.length === 0) {
+  if (!projects || projects.length === 0) {
     return (
       <p className="text-center py-20">
         No projects available.
@@ -61,12 +64,12 @@ const ProjectSection = () => {
   }
 
   return (
-    <div id="work" className="w-full px-[12%] py-10 scroll-mt-20">
-      <h2 className="text-center text-3xl font-Ovo">
+    <div id="work" className="w-full px-[6%] md:px-[12%] py-10 scroll-mt-20">
+      <h2 className="text-center text-3xl font-Ove">
         My latest work
       </h2>
 
-      <p className="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo">
+      <p className="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ove">
         Welcome to my web development portfolio!
       </p>
 

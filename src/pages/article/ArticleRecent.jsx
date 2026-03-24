@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 const ArticleRecent = ({ recent, onSelectArticle }) => {
   return (
-    <div className="w-[320px] sticky top-[100px] self-start">
+    <div className="w-full lg:w-[320px] lg:sticky lg:top-[100px] self-start drop-shadow-sm">
       <Card>
         <CardHeader>
           <CardTitle>Recent Posts</CardTitle>

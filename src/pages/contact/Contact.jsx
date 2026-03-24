@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { motion } from "motion/react";
 import { sendMessage } from "@/api/contact.api";
+import { Textarea } from "@/components/ui/textarea";
 
 
 // Animation configs
@@ -98,12 +99,12 @@ const Contact = () => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="w-full px-[12%] py-10 scroll-mt-20 mt-8 md:mt-16"
+      className="w-full px-[6%] md:px-[12%] py-10 scroll-mt-20 mt-8 md:mt-16"
     >
       {/* Title */}
       <motion.h2
         variants={item}
-        className="text-center font-Ovo text-xl md:text-3xl"
+        className="text-center font-Ove text-xl md:text-3xl"
       >
         Contact me
       </motion.h2>
@@ -112,7 +113,7 @@ const Contact = () => {
 
         {/* LEFT SIDE */}
         <motion.div variants={container} className="p-2 md:p-8">
-          <motion.h2 variants={item} className="text-xl sm:text-3xl font-Ovo mb-6">
+          <motion.h2 variants={item} className="text-xl sm:text-3xl font-Ove mb-6">
             Let’s Work Together
           </motion.h2>
 
@@ -141,8 +142,8 @@ const Contact = () => {
             className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           >
             {/* Name */}
-            <motion.div variants={item}>
-              <label>Name</label>
+            <motion.div variants={item} className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium">Name</label>
               <Input
                 name="senderName"
                 value={formData.senderName}
@@ -153,8 +154,8 @@ const Contact = () => {
             </motion.div>
 
             {/* Subject */}
-            <motion.div variants={item}>
-              <label>Subject</label>
+            <motion.div variants={item} className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium">Subject</label>
               <Input
                 name="subject"
                 value={formData.subject}
@@ -165,8 +166,8 @@ const Contact = () => {
             </motion.div>
 
             {/* Email */}
-            <motion.div variants={item} className="col-span-2">
-              <label>Email</label>
+            <motion.div variants={item} className="col-span-1 sm:col-span-2 flex flex-col gap-1.5">
+              <label className="text-sm font-medium">Email</label>
               <Input
                 name="email"
                 value={formData.email}
@@ -177,9 +178,9 @@ const Contact = () => {
             </motion.div>
 
             {/* Message */}
-            <motion.div variants={item} className="col-span-2">
-              <label>Message</label>
-              <textarea
+            <motion.div variants={item} className="col-span-1 sm:col-span-2 flex flex-col gap-1.5">
+              <label className="text-sm font-medium">Message</label>
+              <Textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
@@ -191,11 +192,11 @@ const Contact = () => {
             </motion.div>
 
             {/* Button */}
-            <motion.div variants={item} className="col-span-2">
+            <motion.div variants={item} className="col-span-1 sm:col-span-2">
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-[#228BE6] to-cyan-300"
+                className="w-full bg-gradient-to-r from-[#228BE6] to-cyan-300 py-6 font-semibold"
               >
                 {loading ? "Sending..." : "SEND MESSAGE"}
               </Button>

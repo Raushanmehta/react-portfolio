@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import axios from "axios"
 import ArticlesDetails from "./ArticlesDetails"
 import ArticleRecent from "./ArticleRecent"
+import Loader from "@/components/loader/Loader"
 import { getAllArticles, getArticleBySlug } from "@/api/article.api"
 
 
@@ -65,23 +66,38 @@ const Articles = () => {
     navigate(`/article/${article.slug}`)
   }
 
+  if (allArticles.length === 0 && loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (error && !currentArticle) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+         <p className="text-xl font-medium text-red-500">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <motion.section
       initial="initial"
       whileInView="whileInView"
       viewport={{ once: true }}
-      className="w-full px-[12%] py-10 scroll-mt-20 mt-8 md:mt-16"
+      className="w-full px-[6%] md:px-[12%] py-10 scroll-mt-20 mt-8 md:mt-16"
     >
       <motion.h2
         variants={item}
-        className="text-center font-Ovo text-xl md:text-3xl mb-10"
+        className="text-center font-Ove text-xl md:text-3xl mb-10"
       >
       Article        
       </motion.h2>
 
       <div className="flex w-full flex-col lg:flex-row items-start gap-10 my-10">
-        <ArticlesDetails article={currentArticle} related={related} />
+        <ArticlesDetails article={currentArticle} related={related} loading={loading} />
 
         <ArticleRecent
           recent={allArticles}

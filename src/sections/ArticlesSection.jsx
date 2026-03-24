@@ -5,6 +5,7 @@ import ArticlesSectionCard from "./ArticlesSectionCard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllArticles } from "@/api/article.api";
+import Loader from "@/components/loader/Loader";
 
 const ArticlesSection = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const ArticlesSection = () => {
     const fetchData = async () => {
       try {
         const res = await getAllArticles();
-        setAllArticles(res?.data?.articles || []); // ✅ safe access
+        setAllArticles(res?.data?.articles || []); 
       } catch (err) {
         console.error("Error fetching articles:", err);
       } finally {
@@ -52,23 +53,25 @@ const ArticlesSection = () => {
     fetchData();
   }, []);
 
-  // ✅ Loading state
   if (loading) {
-    return <p className="text-center py-10">Loading articles...</p>;
+    return (
+      <div className="flex items-center justify-center py-10">
+        <Loader />
+      </div>
+    );
   }
 
-  // ✅ No data fallback
   if (allArticles.length === 0) {
-    return <p className="text-center py-10">No articles found</p>;
+    return <p className="text-center py-10 text-gray-500">No articles found</p>;
   }
 
   return (
     <section className="pb-24">
-      <h2 className="text-center text-3xl font-Ovo">
+      <h2 className="text-center text-3xl font-Ove">
         My Articles Post
       </h2>
 
-      <p className="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo">
+      <p className="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ove">
         Here are some of my articles that I have written.
       </p>
 
