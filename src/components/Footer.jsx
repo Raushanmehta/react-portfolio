@@ -100,7 +100,7 @@ const Footer = () => {
       {/* FOOTER TEXT */}
       <p className="text-gray-500 text-sm">
         <a
-          href="https://raushanmehtaadmin.vercel.app/"
+          href="https://admin.raushanmehta.in/"
           target="_blank"
           rel="noopener noreferrer"
           className="cursor-pointer"
