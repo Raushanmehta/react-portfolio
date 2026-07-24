@@ -70,7 +70,7 @@ const ProjectSection = () => {
       </h2>
 
       <p className="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ove">
-        Welcome to my web development portfolio!
+        Welcome to my work section! Here are a few of the projects I've worked on.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-10 gap-6 dark:text-black">

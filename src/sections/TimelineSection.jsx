@@ -63,7 +63,7 @@ const TimelineSection = () => {
       >
         <h1 className="text-4xl font-Ove mb-4">Skills & Experience</h1>
         <p className="text-gray-500 max-w-xl mb-12 font-Ove">
-          Targeting Frontend Developer roles with an organization of high repute with a scope of improving knowledge and further career growth.
+          Targeting Software Developer roles with an organization of high repute with a scope of improving knowledge and further career growth.
         </p>
       </motion.div>
 

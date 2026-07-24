@@ -107,7 +107,7 @@ const Project = () => {
           Projects
         </h1>
         <p className="mt-2 text-slate-400">
-          Targeting Frontend Developer roles with growth opportunities.
+          Here are some of the projects I have worked on over the years.
         </p>
       </motion.header>
 

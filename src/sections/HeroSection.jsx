@@ -55,7 +55,7 @@ const HeroSection = () => {
         variants={item}
         src={user?.avatar?.url || "/default-avatar.png"}
         alt="avatar"
-        className="w-32 h-32 rounded-full"
+        className="w-32 h-32 rounded-full lg:mt-10"
       />
 
       {/* Greeting */}
@@ -79,7 +79,7 @@ const HeroSection = () => {
         variants={item}
         className="max-w-2xl font-Ove text-gray-600 dark:text-gray-300"
       >
-        I am a Software Developer from Bengaluru, India with experience building
+        I am a Software Developer from Noida, India with experience building
         modern, scalable, and performance-focused applications.
       </motion.p>
 

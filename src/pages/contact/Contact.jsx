@@ -118,7 +118,7 @@ const Contact = () => {
           </motion.h2>
 
           {[
-            { icon: <MapPin />, title: "Address", value: "Ahmdhabad, Patna, Bihar" },
+            { icon: <MapPin />, title: "Address", value: "Noida, Bangalore, Patna, Bihar" },
             { icon: <Phone />, title: "Phone", value: "+91 9304137746" },
             { icon: <Mail />, title: "Email", value: "raushanmehta2184@gmail.com" },
           ].map((info, i) => (

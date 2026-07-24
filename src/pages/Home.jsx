@@ -7,6 +7,7 @@ import TimelineSection from "@/sections/TimelineSection"
 import ArticlesSection from "@/sections/ArticlesSection"
 import Snowfall from "react-snowfall"
 
+
 const Home = () => {
   return (
     <>
@@ -15,6 +16,7 @@ const Home = () => {
       <TimelineSection />
       <Service />
       <ProjectSection />
+
       <ArticlesSection />
       <CTASection />
       <GetTouch />

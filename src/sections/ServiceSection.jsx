@@ -61,9 +61,10 @@ const ServiceSection = () => {
           Services
         </h1>
         <p className="text-base font-Ove text-gray-600">
-          Targeting Frontend Developer roles with an organization of
+          We provide a wide range of digital
+          services to help businesses
           <br className="hidden sm:block" />
-          high repute with a scope of improving knowledge and further career growth.
+          build a strong and engaging digital presence.
         </p>
       </motion.div>
 
