@@ -15,6 +15,7 @@ const Contact = lazy(() => import("./pages/contact/Contact"));
 const Project = lazy(() => import("./pages/project/Project"));
 const ProjectView = lazy(() => import("./pages/project/ProjectView"));
 const Articles = lazy(() => import("./pages/article/Articles"));
+const Resources = lazy(() => import("./pages/Resources/Resources"));
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/project/" element={<Project />} />
             <Route path="/article/:slug" element={<Articles />} />
             <Route path="/contact/" element={<Contact />} />
+            <Route path="/resources/" element={<Resources />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />
