@@ -16,7 +16,6 @@ const Home = () => {
       <TimelineSection />
       <Service />
       <ProjectSection />
-
       <ArticlesSection />
       <CTASection />
       <GetTouch />

@@ -108,7 +108,7 @@ const Navbar = () => {
         </button>
 
         <ul className="flex flex-col gap-6 px-10 py-24 text-lg font-medium dark:text-black">
-          {["Home", "About", "Project", "Resources", "Contact"].map((item) => (
+          {["Home", "About", "Project", "Contact"].map((item) => (
             <li key={item}>
               <Link
                 to={`/${item === "Home" ? "" : item.toLowerCase()}`}
